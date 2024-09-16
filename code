@@ -1,0 +1,120 @@
+# プロジェクトフェーズを表すデータクラスを定義
+from dataclasses import dataclass, field
+from typing import List
+
+@dataclass
+class Activity:
+    description: str
+
+@dataclass
+class Goal:
+    description: str
+
+@dataclass
+class Phase:
+    name: str
+    start_date: str
+    end_date: str
+    activities: List[Activity] = field(default_factory=list)
+    goals: List[Goal] = field(default_factory=list)
+
+@dataclass
+class ProjectPlan:
+    name: str
+    start_date: str
+    phases: List[Phase] = field(default_factory=list)
+
+# プロジェクトプランを定義
+project_plan = ProjectPlan(
+    name="持続的発展のための次世代エネルギー常温核融合開発プロジェクト",
+    start_date="2024年9月",
+    phases=[
+        Phase(
+            name="フェーズ1：基礎研究と理論確立",
+            start_date="2024年9月",
+            end_date="2029年8月",
+            activities=[
+                Activity(description="国際的な研究チームの編成"),
+                Activity(description="理論モデルの構築"),
+                Activity(description="基礎実験の実施"),
+            ],
+            goals=[
+                Goal(description="常温核融合の理論的可能性の検証"),
+                Goal(description="国際的な研究ネットワークの構築"),
+            ],
+        ),
+        Phase(
+            name="フェーズ2：技術開発とプロトタイプ作成",
+            start_date="2029年9月",
+            end_date="2034年8月",
+            activities=[
+                Activity(description="実験設備の拡充"),
+                Activity(description="プロトタイプ装置の開発"),
+                Activity(description="性能評価と改良"),
+            ],
+            goals=[
+                Goal(description="実用可能な常温核融合装置の開発"),
+                Goal(description="技術的ブレークスルーの達成"),
+            ],
+        ),
+        Phase(
+            name="フェーズ3：規制整備と標準化",
+            start_date="2034年9月",
+            end_date="2039年8月",
+            activities=[
+                Activity(description="安全基準の策定"),
+                Activity(description="規制当局との協議"),
+                Activity(description="知的財産の保護"),
+            ],
+            goals=[
+                Goal(description="技術の安全性と信頼性の確保"),
+                Goal(description="グローバルな規制環境の整備"),
+            ],
+        ),
+        Phase(
+            name="フェーズ4：商業化とインフラ構築",
+            start_date="2039年9月",
+            end_date="2044年8月",
+            activities=[
+                Activity(description="生産設備の建設"),
+                Activity(description="サプライチェーンの確立"),
+                Activity(description="市場戦略の展開"),
+            ],
+            goals=[
+                Goal(description="常温核融合装置の商業生産と販売開始"),
+                Goal(description="市場シェアの獲得と拡大"),
+            ],
+        ),
+        Phase(
+            name="フェーズ5：グローバルな普及と最適化",
+            start_date="2044年9月",
+            end_date="2050年以降",
+            activities=[
+                Activity(description="エネルギーインフラの更新"),
+                Activity(description="持続可能なエコシステムの構築"),
+                Activity(description="教育・啓発活動"),
+            ],
+            goals=[
+                Goal(description="常温核融合を主力エネルギーとする社会の実現"),
+                Goal(description="持続可能なエネルギー供給体制の確立"),
+            ],
+        ),
+    ],
+)
+
+# プロジェクトプランの内容を表示
+def display_project_plan(plan: ProjectPlan):
+    print(f"プロジェクト名: {plan.name}")
+    print(f"開始日: {plan.start_date}\n")
+    for phase in plan.phases:
+        print(f"{phase.name} ({phase.start_date} 〜 {phase.end_date})")
+        print(" 活動内容:")
+        for activity in phase.activities:
+            print(f"  - {activity.description}")
+        print(" 目標:")
+        for goal in phase.goals:
+            print(f"  - {goal.description}")
+        print()
+
+# プロジェクトプランを表示
+display_project_plan(project_plan)
